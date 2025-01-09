@@ -66,23 +66,28 @@ if uploaded_files:
                 try:
                     st.subheader("Summary of Statistics")
 
-                    # Display temperature statistics summary
-                    st.markdown("### Temperature Summary")
-                    temp_min = temp_stats['Value'].min()
-                    temp_max = temp_stats['Value'].max()
-                    temp_avg = temp_stats['Value'].mean()
-                    st.write(f"**Min Temperature:** {temp_min}")
-                    st.write(f"**Max Temperature:** {temp_max}")
-                    st.write(f"**Average Temperature:** {temp_avg}")
+                    # Overall Min and Max
+                    overall_min_temp_value = temp_stats.loc['min'].min()
+                    overall_min_temp_sensor = temp_stats.loc['min'].idxmin()
+                    overall_max_temp_value = temp_stats.loc['max'].max()
+                    overall_max_temp_sensor = temp_stats.loc['max'].idxmax()
 
-                    # Display relative humidity statistics summary
-                    st.markdown("### Relative Humidity (RH) Summary")
-                    rh_min = rh_stats['Value'].min()
-                    rh_max = rh_stats['Value'].max()
-                    rh_avg = rh_stats['Value'].mean()
-                    st.write(f"**Min RH:** {rh_min}")
-                    st.write(f"**Max RH:** {rh_max}")
-                    st.write(f"**Average RH:** {rh_avg}")
+                    # Display overall min and max temperature with sensor details
+                    st.markdown("### Overall Temperature Summary")
+                    st.write(f"**Overall Min Temperature:** {overall_min_temp_value} from Sensor: {overall_min_temp_sensor}")
+                    st.write(f"**Overall Max Temperature:** {overall_max_temp_value} from Sensor: {overall_max_temp_sensor}")
+
+                    # Overall Min and Max for RH
+                    overall_min_rh_value = rh_stats.loc['min'].min()
+                    overall_min_rh_sensor = rh_stats.loc['min'].idxmin()
+                    overall_max_rh_value = rh_stats.loc['max'].max()
+                    overall_max_rh_sensor = rh_stats.loc['max'].idxmax()
+
+                    # Display overall min and max RH with sensor details
+                    st.markdown("### Overall Relative Humidity (RH) Summary")
+                    st.write(f"**Overall Min RH:** {overall_min_rh_value} from Sensor: {overall_min_rh_sensor}")
+                    st.write(f"**Overall Max RH:** {overall_max_rh_value} from Sensor: {overall_max_rh_sensor}")
+
                 except KeyError as e:
                     st.error(f"KeyError: Could not calculate summary statistics. Missing key: {e}")
                 except Exception as e:

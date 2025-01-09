@@ -13,7 +13,7 @@ uploaded_files = st.file_uploader("Drop your Excel files here", type=["xls", "xl
 
 # Display the count of uploaded files
 if uploaded_files:
-     st.warning(f"**You have uploaded {len(uploaded_files)} file(s).**")  
+     st.warning(f"**You have uploaded {len(uploaded_files)} file(s).**")
 
 # Add an upload button to process files
 if uploaded_files:
@@ -62,5 +62,31 @@ if uploaded_files:
 
                 st.subheader("Relative Humidity (RH) Statistics")
                 st.dataframe(rh_stats)
+
+                try:
+                    st.subheader("Summary of Statistics")
+
+                    # Display temperature statistics summary
+                    st.markdown("### Temperature Summary")
+                    temp_min = temp_stats['Value'].min()
+                    temp_max = temp_stats['Value'].max()
+                    temp_avg = temp_stats['Value'].mean()
+                    st.write(f"**Min Temperature:** {temp_min}")
+                    st.write(f"**Max Temperature:** {temp_max}")
+                    st.write(f"**Average Temperature:** {temp_avg}")
+
+                    # Display relative humidity statistics summary
+                    st.markdown("### Relative Humidity (RH) Summary")
+                    rh_min = rh_stats['Value'].min()
+                    rh_max = rh_stats['Value'].max()
+                    rh_avg = rh_stats['Value'].mean()
+                    st.write(f"**Min RH:** {rh_min}")
+                    st.write(f"**Max RH:** {rh_max}")
+                    st.write(f"**Average RH:** {rh_avg}")
+                except KeyError as e:
+                    st.error(f"KeyError: Could not calculate summary statistics. Missing key: {e}")
+                except Exception as e:
+                    st.error(f"An error occurred while summarizing statistics: {e}")
+
         else:
             st.warning("No valid DataFrames to merge.")

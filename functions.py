@@ -1,8 +1,8 @@
-# import pandas as pd
-# import streamlit as st
-# import plotly.graph_objects as go
-# import io
-# from datetime import datetime, timedelta
+import pandas as pd
+import streamlit as st
+import plotly.graph_objects as go
+import io
+from datetime import datetime, timedelta
 
 # def calculate_interval(data):
 #     first_timestamp = datetime.strptime(data[0], "%d-%m-%Y %H:%M:%S")
